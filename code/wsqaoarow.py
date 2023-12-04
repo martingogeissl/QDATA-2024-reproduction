@@ -113,24 +113,6 @@ def change_mixer(circuit, c_vector):
             circuit.insert_gate(i+qubit, RY(-theta), [qubit])
     return circuit
 
-# standard QAOA
-def c_equal():
-    c_vector = [0.5]*nqubits
-    return c_vector
-    
-# one-hot adaption    
-def c_one_hot():
-    c_vector = [1/N]*nqubits
-    return c_vector
-
-# random c vector generation
-def c_random():
-    c_vector = []
-    for a in range(nqubits):
-        r = random.random()
-        c_vector.append(r)
-    return c_vector
-
 # random row assignment
 def c_random_row():
     c_vector = []
@@ -146,10 +128,7 @@ def c_random_row():
 
 # relaxation method decision
 def get_c(relax):
-    if relax == 'random':
-        return c_random()
-    elif relax == 'rows':
-        return c_random_row()
+    return c_random_row()
 
 # get observable
 problem_observable = create_observable()
@@ -165,14 +144,8 @@ nbshots = 0
 max_iter = 10000
 niter = 10
 epsilon = 0.25
-relaxation = 'random'
-#relaxation = 'rows'
     
-# define path
-if relaxation == 'random':
-    path = 'results/WS-QAOA-RAND/p' + str(depth) + '/'
-elif relaxation == 'rows':
-    path = 'results/WS-QAOA-ROW/p' + str(depth) + '/'
+path = 'results/WS-QAOA-ROW/p' + str(depth) + '/'
     
 # define qpu
 qpu = get_default_qpu()
@@ -185,13 +158,12 @@ print('WS-QAOA depth: ' + str(depth))
 print('Number of shots: ' + str(nbshots))
 print('Number of algorithm iterations: ' + str(niter))
 print('Epsilon regulation: ' + str(epsilon))
-print('Relaxation Method: ' + relaxation)
 print()
 
 # main loop
 for i in range(niter):
     # get initial relaxation
-    c_vector = get_c(relaxation)
+    c_vector = get_c()
     print('Iteration ' + str(i+1) + ': c_vector: ' + str(c_vector))
     with open(path + str(i+1) + '/c_vector', 'w') as file:
         file.writelines(str(c_vector))
