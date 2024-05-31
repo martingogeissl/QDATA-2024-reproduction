@@ -1,7 +1,7 @@
-# Data Encoding Patterns and their Impact on Quantum Algorithms in the NISQ Era
+# Quantum Data Encoding Patterns and their Consequences
 
 ## Overview
-This repository contains the necessary artefacts to reproduce the results of the experiments carried out as part of the work "Data Encoding Patterns and their Impact on Quantum Algorithms in the NISQ Era"
+This repository contains the necessary artefacts to reproduce the results of the experiments carried out as part of the work "Quantum Data Encoding Patterns and their Consequences"
 As the execution was performed on the quantum simulator [QLM](https://atos.net/en/solutions/quantum-learning-machine) with restricted access, we offer two ways to reproduce our results. For those who do not have access to the QLM, we provide the retrieved raw data to reproduce the recorded data.
 
 ## Algorithms
