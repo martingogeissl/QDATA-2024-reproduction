@@ -1,13 +1,18 @@
 # Quantum Data Encoding Patterns and their Consequences
 
 ## Overview
-This repository contains the necessary artefacts to reproduce the results of the experiments carried out as part of the work "Quantum Data Encoding Patterns and their Consequences"
-As the execution was performed on the quantum simulator [QLM](https://atos.net/en/solutions/quantum-learning-machine) with restricted access, we offer two ways to reproduce our results. For those who do not have access to the QLM, we provide the retrieved raw data to reproduce the recorded data.
+This repository contains the necessary artefacts to reproduce the results of the experiments carried out as part of the work "Quantum Data Encoding Patterns and their Consequences". The [Jupyter Notebook](Encodings.ipynb) covers the steps from a provided Sudoku graph to the final QAOA circuit for every encoding instance.
 
-## Algorithms
-The conducted resarch contains three variants of the QAOA, the standard version and two war-starting versions.
-As detailed in our paper in section *Warm-starting graph coloring problems*, there is no definitive way to determine a warm-starting option for graph coloring problems and derivations of such. 
-Hence we examined the usage of a random initialization to simulate a warm-starting deviation from the standard QAOA.
+The [code](code) and [data](data) folders contain the implementations and results of experiments conducted on the binary boolean encoding for a $4\times 4$ Sudoku. 
+
+## Framework
+We implemented the encodings on the quantum simulator [QLM](https://atos.net/en/solutions/quantum-learning-machine). As the QLM has restricted access, it may not be possible to execute the algorithms on the simulated QPU.
+
+## [Encodings.ipynb](Encodings.ipynb)
+The notebook starts of by introducing the Sudoku graph representation. AFter some required functions, the encodings are initiated using the [SymPy](https://www.sympy.org/en/index.html) library. For each encoding the amount of CNOTs and the circuit depth is outputted. The depth can vary, as some Observable to Ansatz strategies rely on heuristics.
+
+## QAOA implementation
+Due to prior research, we assessed the binary encoding on standard QAOA and two adapted Warm-Starting QAOA, as proposed by [Egger et al.](https://quantum-journal.org/papers/q-2021-06-17-479/)
 
 The algorithm parameters and experiment details are as follows:
 
@@ -33,8 +38,11 @@ For this variant, a random permuatation of the values from $1$ to $N$ is assgine
 This Sudoku is then translated to the $c^*$ vector, $\varepsilon$-regulated and fed to the warm-starting adapted QAOA circuit.
 
 
-## Data
+### Data
+To conserve the results, the result objects have been serialised with the pickling based [dill](https://dill.readthedocs.io/en/latest/) module.
+In each iteration folder the "minimize_result" object contains the results from the first QAOA phase, namely minimised final energy and optimal parameters $\gamma$ and $\beta$.
 
-## Reproduction with QLM
+"success_probability" contains the total probability of retrieving a valid Sudoku.
 
-## Reproduction without QLM
+"valid_samples" contain the set of valid binary encoded Sudokus with their measured probability after the number of shots.
+
