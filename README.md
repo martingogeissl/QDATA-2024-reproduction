@@ -46,6 +46,6 @@ In each iteration folder the "minimize_result" object contains the results from 
 
 "valid_samples" contain the set of valid binary encoded Sudokus with their measured probability after the number of shots.
 
-To save on memory, we only evaluated the results for positive samples (valid Sudokus). With this, only $288$ Sample objects have to be process for the $4\times 4$ case instead of all possible $2^32$.
+To save on memory, we only evaluated the results for positive samples (valid Sudokus). With this, only $288$ Sample objects have to be process for the $4\times 4$ case instead of all possible $2^{32}$.
 The file [valid_integers](code/valid_sudokus/valid_integers) contains a pickled list with integers that correspond to binary encoded valid Sudokus.
 
